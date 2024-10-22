@@ -25,21 +25,35 @@ export class UserController {
     
     return this.userService.validateUser( loginDto)
   }
-  
-  @UseGuards(UserGuards)
-  @Post('upload-picture')
-  @UseInterceptors(FileInterceptor('file', { storage: memoryStorage() }))
-  uploadProfilePicture(@UploadedFile() file: Express.Multer.File, @Body() body: any) {
-    const fileBase64 = file.buffer.toString('base64');  // Convert file buffer to base64
-    return this.userService.saveOrUpdatePicture(body.id, fileBase64);
+
+  @Post(':id/upload-profile-picture')
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: './uploads/profile-pictures',  // Directory for storing files
+      filename: (req, file, cb) => {
+        const ext = extname(file.originalname);
+        const fileName = `${req.params.id}-${Date.now()}${ext}`;
+        cb(null, fileName);
+      }
+    }),
+    fileFilter: (req, file, cb) => {
+      // Accept image files only
+      if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'), false);
+      }
+      cb(null, true);
+    }
+  }))
+  async uploadProfilePicture(@Param('id') id: number, @UploadedFile() file: Express.Multer.File) {
+    const profilePictureUrl = `/uploads/profile-pictures/${file.filename}`;
+    await this.userService.updateProfilePicture(id, profilePictureUrl);
+    return {
+      message: 'Profile picture uploaded successfully!',
+      url: profilePictureUrl,
+    };
   }
 
-  @Put('update-picture')
-  @UseInterceptors(FileInterceptor('file', { storage: memoryStorage() }))
-  updateProfilePicture(@UploadedFile() file: Express.Multer.File, @Body() body: any) {
-    const fileBase64 = file.buffer.toString('base64');  // Convert file buffer to base64
-    return this.userService.saveOrUpdatePicture(body.userId, fileBase64);
-  }
+    
 
 
   @Get()

@@ -34,6 +34,61 @@ async createEvent(@Body() createEventDto: CreateEventDto, @Request() req) {
 
 }
 
+@UseGuards(jwtGuards)
+@Post('upload-event-profile-picture')
+@UseInterceptors(FileInterceptor('file', {
+  storage: diskStorage({
+    destination: './uploads/profile-pictures',  // Directory for storing files
+    filename: (req, file, cb) => {
+      const ext = extname(file.originalname);
+      const fileName = `${req.params.id}-${Date.now()}${ext}`;
+      cb(null, fileName);
+    }
+  }),
+  fileFilter: (req, file, cb) => {
+    // Accept image files only
+    if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
+      return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+  }
+}))
+async uploadProfilePicture(@Param('id') id: number, @UploadedFile() file: Express.Multer.File) {
+  const profilePictureUrl = `/uploads/profile-pictures/${file.filename}`;
+  await this.eventService.updateProfilePicture(id, profilePictureUrl);
+  return {
+    message: 'Profile picture uploaded successfully!',
+    url: profilePictureUrl,
+  };
+}
+@UseGuards(jwtGuards)
+@Post('upload-event-cover-picture')
+@UseInterceptors(FileInterceptor('file', {
+  storage: diskStorage({
+    destination: './uploads/profile-pictures',  // Directory for storing files
+    filename: (req, file, cb) => {
+      const ext = extname(file.originalname);
+      const fileName = `${req.params.id}-${Date.now()}${ext}`;
+      cb(null, fileName);
+    }
+  }),
+  fileFilter: (req, file, cb) => {
+    // Accept image files only
+    if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
+      return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+  }
+}))
+async uploadCoverPhoto(@Param('id') id: number, @UploadedFile() file: Express.Multer.File) {
+  const profilePictureUrl = `/uploads/profile-pictures/${file.filename}`;
+  await this.eventService.updateProfilePicture(id, profilePictureUrl);
+  return {
+    message: 'Profile picture uploaded successfully!',
+    url: profilePictureUrl,
+  };
+}
+
 
   @Get("get/all/event")
   findAll() {

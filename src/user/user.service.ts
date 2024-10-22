@@ -1,5 +1,5 @@
 
-import { BadRequestException, Injectable, UnauthorizedException, Patch } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException, Patch, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -77,25 +77,24 @@ export class UserService {
      }
    
     
-} async uploadProfilePicture(userId: string, file: Express.Multer.File) {
-  const fileKey = `${uuidv4()}-${file.originalname}`;
+
+    }
+
+
+
+    async updateProfilePicture(id: number, profilePictureUrl: string): Promise<User> {
+      const user = await this.userRepository.findOne({ where: { id } });
   
-  const uploadResult = await this.s3.upload({
-    Bucket: process.env.AWS_S3_BUCKET_NAME,  // Your S3 bucket name
-    Key: fileKey,
-    Body: file.buffer,
-    ContentType: file.mimetype,
-  }).promise();
-
-  // Save the S3 file URL to the database
-  const imageUrl = uploadResult.Location;
-  return await this.saveOrUpdatePicture(userId, imageUrl);
-}
-
-async saveOrUpdatePicture(userId: string, imageUrl: string) {
-  // Save the image URL to your database
-  return await this.userRepository.update(userId, { profilePicture: imageUrl });
-}
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+  
+      user.profilePicture = profilePictureUrl;  // Assuming the User entity has a `profilePicture` field
+      return this.userRepository.save(user);  // Save updated user with profile picture
+    }
+  
+    // Other user-related service methods...
+  
 
 async logIn(user: any) {
   
