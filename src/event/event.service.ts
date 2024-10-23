@@ -1,6 +1,6 @@
 import { User } from './../user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
-import { Injectable, UnauthorizedException, Patch, NotFoundException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Patch, NotFoundException, BadRequestException } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -91,13 +91,25 @@ export class EventService {
     const user = await this.eventRepository.findOne({ where: { id } });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new BadRequestException();
     }
 
     user. eventProfilePhoto = profilePictureUrl;  // Assuming the User entity has a `profilePicture` field
     return this.userRepository.save(user);  // Save updated user with profile picture
   }
 
+
+   async getEventPhoto(id:number){
+     try{
+      const user = await this.eventRepository.findOneBy({id})
+      if(!user){
+        throw new BadRequestException();
+      }
+      return{user:id, userProfile:user.eventProfilePhoto}
+     }catch(error){
+      throw new BadRequestException();
+     }
+   }
    async update(id: number, updateEventDto: UpdateEventDto,  ) {
     const eventToUpdate = await this.eventRepository.findOneBy({id})
 

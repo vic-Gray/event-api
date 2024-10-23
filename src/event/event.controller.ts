@@ -88,7 +88,10 @@ async uploadCoverPhoto(@Param('id') id: number, @UploadedFile() file: Express.Mu
     url: profilePictureUrl,
   };
 }
-
+@Get(':id/events/photo')
+async getProfile(@Param('id') id:number) {
+  return this.eventService.getEventPhoto(id);
+}
 
   @Get("get/all/event")
   findAll() {

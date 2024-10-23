@@ -9,7 +9,6 @@ import path, { extname } from 'path';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage, memoryStorage } from 'multer';
 import { Observable, of } from 'rxjs';
-import { UserGuards } from 'src/Roles/userguard';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
