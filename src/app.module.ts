@@ -8,6 +8,8 @@ import { User } from './user/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './sratagies/jwt.stratagy';
 import { BookingModule } from './booking/booking.module';
+import { Booking } from './booking/entities/booking.entity';
+
 
 
 
@@ -19,14 +21,14 @@ import { BookingModule } from './booking/booking.module';
     port:6543,
     username:"postgres.hbwebnfupbywebptrvro",
     password:"maxsolderme182005",
-    entities:[Event,User],
+    entities:[Event,User,Booking],
     synchronize:true,
     // logging:true
   }), EventModule, UserModule, JwtModule.register({
     global:true,
     secret:"1234",
     signOptions:{expiresIn:"12h"}
-  }), BookingModule],
+  }), BookingModule, ],
   
   providers: [JwtStrategy],
 })
