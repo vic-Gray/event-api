@@ -9,6 +9,7 @@ import path, { extname } from 'path';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage, memoryStorage } from 'multer';
 import { Observable, of } from 'rxjs';
+import { UserGuard } from 'src/Roles/user.guards';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -25,6 +26,7 @@ export class UserController {
     return this.userService.validateUser( loginDto)
   }
 
+  @UseGuards(UserGuard)
   @Post(':id/upload-profile-picture')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({

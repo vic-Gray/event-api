@@ -21,6 +21,16 @@ export class Event {
     @Column()
     eventType:string
 
+     @Column({nullable:true})
+     location:string
+
+     @Column("text",{nullable:true,array:true})
+     category: string[]
+
+     @Column({default:0})
+     price:number
+
+
    @Column()
     numberOfTicket:number
 

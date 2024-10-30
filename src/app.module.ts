@@ -9,6 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './sratagies/jwt.stratagy';
 import { BookingModule } from './booking/booking.module';
 import { Booking } from './booking/entities/booking.entity';
+import { CommunityModule } from './community/community.module';
 
 
 
@@ -28,7 +29,7 @@ import { Booking } from './booking/entities/booking.entity';
     global:true,
     secret:"1234",
     signOptions:{expiresIn:"12h"}
-  }), BookingModule, ],
+  }), BookingModule, CommunityModule, ],
   
   providers: [JwtStrategy],
 })

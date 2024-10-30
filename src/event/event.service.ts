@@ -27,26 +27,21 @@ export class EventService {
        user.user.username,
        user.user.email
      ]
-    // Use 'sub' from the JWT as the user ID
     const userValid = await this.userRepository.findOne({ where: { id: user.user.sub } });
   
-    // Log the user returned from the database to verify it matches the user from the JWT
     console.log('User from Database:', userValid);
   
     if (!userValid) {
       throw new UnauthorizedException('Sorry, cannot create this event');
     }
   
-    // Create the event associated with the correct user
     const newEvent = this.eventRepository.create({
       ...createEventDto,
-      user: userValid,   // Correct user associated with the event
+      user: userValid,  
     });
-  
-    // Save the event
+
     const latest = await this.eventRepository.save(newEvent,user);
-  
-    // Log the saved event to ensure it was saved with the correct user
+ 
     console.log('Saved Event:', latest);
   
     return {

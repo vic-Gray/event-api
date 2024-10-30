@@ -9,14 +9,24 @@ export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
   @UseGuards(UserGuard)
-  @Post('create')
-  async createEvent(@Body() createEventDto: CreateBookingDto, @Request() req) {
-    console.log(req.user);
-    return this.bookingService.create(createEventDto, req.user, req.event);
-  }  
-  @Get()
-  findAll() {
-    return this.bookingService.findAll();
+  @Post(':eventId')
+  async createBooking(
+      @Body() createBookingDto: CreateBookingDto,
+      @Param('eventId') eventId: number, 
+      @Request() req: any 
+  ) {
+      const userId = req.user.sub;
+      return await this.bookingService.create(createBookingDto, userId, eventId, );
+  }
+  @UseGuards(UserGuard)
+  @Get(':eventId')
+  async GetBooking(
+      @Body() createBookingDto: CreateBookingDto,
+      @Param('eventId') eventId: number, 
+      @Request() req: any 
+  ) {
+      const userId = req.user.sub;
+      return await this.bookingService.create(createBookingDto, userId, eventId, );
   }
 
   @Get(':id')
