@@ -9,8 +9,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './sratagies/jwt.stratagy';
 import { BookingModule } from './booking/booking.module';
 import { Booking } from './booking/entities/booking.entity';
-import { CommunityModule } from './community/community.module';
-
+import { ThreadModule } from './thread/thread.module';
+import { CommentModule } from './comment/comment.module';
+import { Thread } from './thread/entities/thread.entity';
 
 
 
@@ -22,14 +23,14 @@ import { CommunityModule } from './community/community.module';
     port:6543,
     username:"postgres.hbwebnfupbywebptrvro",
     password:"maxsolderme182005",
-    entities:[Event,User,Booking],
+    entities:[Event,User,Booking,Thread],
     synchronize:true,
     // logging:true
   }), EventModule, UserModule, JwtModule.register({
     global:true,
     secret:"1234",
     signOptions:{expiresIn:"12h"}
-  }), BookingModule, CommunityModule, ],
+  }), BookingModule, ThreadModule, CommentModule,],
   
   providers: [JwtStrategy],
 })
