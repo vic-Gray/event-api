@@ -1,4 +1,4 @@
-
+I'm
 import { BadRequestException, Injectable, UnauthorizedException, Patch, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -89,8 +89,8 @@ export class UserService {
         throw new NotFoundException('User not found');
       }
   
-      user.profilePicture = profilePictureUrl;  // Assuming the User entity has a `profilePicture` field
-      return this.userRepository.save(user);  // Save updated user with profile picture
+      user.profilePicture = profilePictureUrl;  
+      return this.userRepository.save(user); 
     }
   
     // Other user-related service methods...
@@ -181,7 +181,7 @@ async logIn(user: any) {
 
     return (
       users
-    ) // Returns an array of users matching the search criteria
+    ) 
   }
 
 }
