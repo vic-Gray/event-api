@@ -19,7 +19,7 @@ export class EventService {
 
 
   async create(createEventDto: CreateEventDto, user: any) {
-    // Log the user object from the JWT
+
     const realUser = user
     console.log('User from JWT:', user);
      const userProfile = [
@@ -78,8 +78,8 @@ export class EventService {
       throw new NotFoundException('User not found');
     }
 
-    user. eventProfilePhoto = profilePictureUrl;  // Assuming the User entity has a `profilePicture` field
-    return this.userRepository.save(user);  // Save updated user with profile picture
+    user. eventProfilePhoto = profilePictureUrl;  
+    return this.userRepository.save(user); 
   }
 
   async updateCoverPhoto(id: number, profilePictureUrl: string): Promise<User> {
@@ -89,8 +89,8 @@ export class EventService {
       throw new BadRequestException();
     }
 
-    user. eventProfilePhoto = profilePictureUrl;  // Assuming the User entity has a `profilePicture` field
-    return this.userRepository.save(user);  // Save updated user with profile picture
+    user. eventProfilePhoto = profilePictureUrl;  
+    return this.userRepository.save(user); 
   }
 
 

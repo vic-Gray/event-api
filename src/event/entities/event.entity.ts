@@ -1,6 +1,6 @@
 
 import { Booking } from "src/booking/entities/booking.entity";
-import { Thread } from "src/thread/entities/thread.entity";
+
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -54,6 +54,5 @@ export class Event {
     
 
     @OneToMany(() => Booking,(booking) => booking.event,{cascade:true}) booking:Booking[]
-    @OneToMany(() => Thread,(thread) => thread.event,{cascade:true}) thread:Thread[]
 }
     

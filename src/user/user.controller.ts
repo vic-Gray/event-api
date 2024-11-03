@@ -30,7 +30,7 @@ export class UserController {
   @Post(':id/upload-profile-picture')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
-      destination: './uploads/profile-pictures',  // Directory for storing files
+      destination: './uploads/profile-pictures', 
       filename: (req, file, cb) => {
         const ext = extname(file.originalname);
         const fileName = `${req.params.id}-${Date.now()}${ext}`;
@@ -38,7 +38,7 @@ export class UserController {
       }
     }),
     fileFilter: (req, file, cb) => {
-      // Accept image files only
+    
       if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
         return cb(new Error('Only image files are allowed!'), false);
       }
@@ -85,7 +85,7 @@ export class UserController {
       throw new UnauthorizedException('No users found with this name');
     }
 
-    return existingUsers; // Return the list of users found
+    return existingUsers;
   }
 }
 

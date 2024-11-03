@@ -89,11 +89,11 @@ export class UserService {
         throw new NotFoundException('User not found');
       }
   
-      user.profilePicture = profilePictureUrl;  // Assuming the User entity has a `profilePicture` field
-      return this.userRepository.save(user);  // Save updated user with profile picture
+      user.profilePicture = profilePictureUrl;  
+      return this.userRepository.save(user); 
     }
   
-    // Other user-related service methods...
+
   
 
 async logIn(user: any) {
@@ -134,19 +134,18 @@ async logIn(user: any) {
 
    async update(id: number, updateUserDto: UpdateUserDto, ) {
 
-    // Find the user by ID
+
     const existingUser = await this.userRepository.findOneBy({ id });
 
-    // Check if the user exists
+
     if (!existingUser) {
       throw new UnauthorizedException(`sorry the user with the id #${id} was not found`);
     }
 
-  
-    // Merge the existing user with the updateUserDto
+
     const newUpdatedUser = this.userRepository.merge(existingUser, updateUserDto);
   
-    // Save the merged entity to the database
+
     const updatedUSer = await this.userRepository.save(newUpdatedUser)
     return{
       message:`dear ${existingUser.name} your profile has been updated succesfully preview your update from your profile`
@@ -176,12 +175,12 @@ async logIn(user: any) {
   async searchUserByName(name: string): Promise<User[]> {
     const users = await this.userRepository
       .createQueryBuilder('user')
-      .where('user.name ILIKE :name', { name: `%${name}%` }) // Use ILIKE for case-insensitive search
+      .where('user.name ILIKE :name', { name: `%${name}%` })
       .getMany();
 
     return (
       users
-    ) // Returns an array of users matching the search criteria
+    )
   }
 
 }

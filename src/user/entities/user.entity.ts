@@ -5,7 +5,7 @@ import { IsEmail } from 'class-validator';
 import { Role } from 'src/Roles/roles.auth';
 import { AfterInsert, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuidv4 } from 'uuid';
-import { Thread } from 'src/thread/entities/thread.entity';
+
 
 
 
@@ -70,6 +70,6 @@ export class User {
     
        @OneToOne(()=> Booking,(booking) => booking.user,{cascade:true}) booking:Booking[]
 
-       @OneToOne(()=> Thread,(thread) => thread.user,{cascade:true}) thread:Thread[]
+   
 
 }

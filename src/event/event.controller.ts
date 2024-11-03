@@ -38,7 +38,7 @@ async createEvent(@Body() createEventDto: CreateEventDto, @Request() req) {
 @Post('upload-event-profile-picture')
 @UseInterceptors(FileInterceptor('file', {
   storage: diskStorage({
-    destination: './uploads/profile-pictures',  // Directory for storing files
+    destination: './uploads/profile-pictures', 
     filename: (req, file, cb) => {
       const ext = extname(file.originalname);
       const fileName = `${req.params.id}-${Date.now()}${ext}`;
@@ -46,7 +46,7 @@ async createEvent(@Body() createEventDto: CreateEventDto, @Request() req) {
     }
   }),
   fileFilter: (req, file, cb) => {
-    // Accept image files only
+
     if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
       return cb(new Error('Only image files are allowed!'), false);
     }
@@ -65,7 +65,7 @@ async uploadProfilePicture(@Param('id') id: number, @UploadedFile() file: Expres
 @Post('upload-event-cover-picture')
 @UseInterceptors(FileInterceptor('file', {
   storage: diskStorage({
-    destination: './uploads/profile-pictures',  // Directory for storing files
+    destination: './uploads/profile-pictures', 
     filename: (req, file, cb) => {
       const ext = extname(file.originalname);
       const fileName = `${req.params.id}-${Date.now()}${ext}`;
@@ -73,7 +73,7 @@ async uploadProfilePicture(@Param('id') id: number, @UploadedFile() file: Expres
     }
   }),
   fileFilter: (req, file, cb) => {
-    // Accept image files only
+
     if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
       return cb(new Error('Only image files are allowed!'), false);
     }
