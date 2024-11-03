@@ -134,10 +134,10 @@ async logIn(user: any) {
 
    async update(id: number, updateUserDto: UpdateUserDto, ) {
 
-
+    // Find the user by ID
     const existingUser = await this.userRepository.findOneBy({ id });
 
-
+    // Check if the user exists
     if (!existingUser) {
       throw new UnauthorizedException(`sorry the user with the id #${id} was not found`);
     }
@@ -175,12 +175,12 @@ async logIn(user: any) {
   async searchUserByName(name: string): Promise<User[]> {
     const users = await this.userRepository
       .createQueryBuilder('user')
-      .where('user.name ILIKE :name', { name: `%${name}%` })
+      .where('user.name ILIKE :name', { name: `%${name}%` }) // Use ILIKE for case-insensitive search
       .getMany();
 
     return (
       users
-    )
+    ) // Returns an array of users matching the search criteria
   }
 
 }
