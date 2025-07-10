@@ -1,85 +1,56 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+🧠 Architecture Decisions
+Modular Folder Structure
+Designed using NestJS modules for separation of concerns and clean scaling. Example modules: auth, users, events, bookings.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+MongoDB with Mongoose
+Chosen for its flexibility with structured and unstructured data such as event details, user bookings, and participation records. Efficient indexing and lean queries optimize performance.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+JWT for Authentication
+JWT tokens support access and refresh tokens with customizable expiry times. Role-based access control ensures secure route gating for Admins, Organizers, and Users.
 
-## Description
+Email Notifications via Nodemailer
+Integrated to send transactional emails such as booking confirmations and event updates.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Real-time Updates (Planned)
+Architecture anticipates future WebSocket or Server-Sent Events integration for live event status and booking notifications.
 
-## Project setup
+🔐 Authentication Flow
+Users register and receive JWT tokens upon login.
 
-```bash
-$ npm install
-```
+Tokens authorize protected routes such as creating or booking events.
 
-## Compile and run the project
+Role-based access controls restrict management endpoints to Admins and Organizers.
 
-```bash
-# development
-$ npm run start
+Refresh tokens and session management to be implemented for enhanced security.
 
-# watch mode
-$ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+📌 TODO (Next Steps)
+ Implement real-time event notifications
 
-## Run tests
+ Add rate limiting and spam protection
 
-```bash
-# unit tests
-$ npm run test
+ Extend test coverage and documentation
 
-# e2e tests
-$ npm run test:e2e
+ Add pagination for event and booking lists
 
-# test coverage
-$ npm run test:cov
-```
+ Integrate user profile management (e.g., profile images)
 
-## Resources
+✨ Why This Project?
+This API is designed to power scalable, secure event management platforms — ideal for:
 
-Check out a few resources that may come in handy when working with NestJS:
+Community-driven events and meetups
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Online and offline booking systems
 
-## Support
+Event organizers seeking reliable backend infrastructure
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Platforms requiring real-time booking and update capabilities
 
-## Stay in touch
+🤝 Contribution
+Contributions and suggestions are welcome! Feel free to fork the repo and submit pull requests. More features and improvements are planned.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+🧑‍💻 Author
+Victory Gray
+Backend Developer | Problem Solver | API Architect
+GitHub(https://github.com/vic-Gray)•LinkedIn• Email(victorygray59@gmail.com)
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
