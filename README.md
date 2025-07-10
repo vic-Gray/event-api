@@ -52,5 +52,5 @@ Contributions and suggestions are welcome! Feel free to fork the repo and submit
 🧑‍💻 Author
 Victory Gray
 Backend Developer | Problem Solver | API Architect
-GitHub(https://github.com/vic-Gray)•LinkedIn• Email(victorygray59@gmail.com)
+[GitHub](https://github.com/vic-Gray)•[LinkedIn](https://www.linkedin.com/in/victory-gray-b479a6351/)•[Email](victorygray59@gmail.com)
 
