@@ -3,7 +3,10 @@ import { BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { UserGuard } from 'src/Roles/user.guards';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('bookings')
 @Controller('booking')
 export class BookingController {
   constructor(private readonly bookingService: BookingService) {}

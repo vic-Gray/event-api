@@ -8,9 +8,12 @@ export class CommentService {
     return 'This action adds a new comment';
   }
 
-  findAll() {
-    return `This action returns all comment`;
-  }
+async findAll(): Promise<Comment[]> {
+  return [
+    { id: 1, content: 'Nice post!' } as unknown as Comment,
+  ];
+}
+
 
   findOne(id: number) {
     return `This action returns a #${id} comment`;

@@ -9,6 +9,9 @@ import { Event } from 'src/event/entities/event.entity';
 
 @Injectable()
 export class BookingService {
+  findAll() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(
     @InjectRepository(Booking) private readonly  BookingRepository: Repository<Booking>,@InjectRepository(Event) private readonly EventRepository: Repository<Event>,@InjectRepository(User) private readonly UserRepository: Repository<User>

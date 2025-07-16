@@ -10,6 +10,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage, memoryStorage } from 'multer';
 import { Observable, of } from 'rxjs';
 import { UserGuard } from 'src/Roles/user.guards';
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('users')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

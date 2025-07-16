@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Booking } from './entities/booking.entity';
 import { Event } from 'src/event/entities/event.entity';
 import { User } from 'src/user/entities/user.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Booking, Event,User]), ],
+  imports:[TypeOrmModule.forFeature([Booking, Event,User]),JwtModule ],
   controllers: [BookingController],
   providers: [BookingService],
   
